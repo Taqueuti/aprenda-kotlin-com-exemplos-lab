@@ -1,8 +1,8 @@
-enum class Nivel { BASICO, INTERMEDIARIO, AVANÇADO }
+enum class Nivel { BASICO, INTERMEDIARIO, AVANCADO }
 
 class Usuario(val nome: String)
 
-data class ConteudoEducacional(var nome: String, var duracao: Int)
+data class ConteudoEducacional(var nome: String, var duracao: Int, var nivel: Nivel)
 
 data class Formacao(val nome: String, var conteudos: MutableList<ConteudoEducacional> = mutableListOf()) {
     val inscritos = mutableListOf<Usuario>()
@@ -16,9 +16,9 @@ data class Formacao(val nome: String, var conteudos: MutableList<ConteudoEducaci
 
 fun main() {
     // Criar instâncias de ConteudoEducacional
-    val conteudo1 = ConteudoEducacional("Introdução ao Kotlin", 60)
-    val conteudo2 = ConteudoEducacional("Estruturas de Controle em Kotlin", 120)
-    val conteudo3 = ConteudoEducacional("Programação Orientada a Objetos em Kotlin", 80)
+    val conteudo1 = ConteudoEducacional("Introdução ao Kotlin", 60, Nivel.BASICO)
+    val conteudo2 = ConteudoEducacional("Estruturas de Controle em Kotlin", 80, Nivel.INTERMEDIARIO)
+    val conteudo3 = ConteudoEducacional("Programação Orientada a Objetos em Kotlin", 120, Nivel.AVANCADO)
 
     // Criar uma formação
     val formacaoKotlin = Formacao("Formação em Kotlin", mutableListOf())
@@ -40,6 +40,6 @@ fun main() {
     println("Nome da formação: ${formacaoKotlin.nome}")
     println("Conteúdos da formação:")
     formacaoKotlin.conteudos.forEachIndexed { index, conteudo ->
-        println("${index + 1}. ${conteudo.nome} (Duração: ${conteudo.duracao} minutos)")
+        println("${index + 1}. ${conteudo.nome} (Duração: ${conteudo.duracao} minutos) Nível:${conteudo.nivel} ")
     }
 }
